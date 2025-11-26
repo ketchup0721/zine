@@ -1,0 +1,217 @@
+/* BASE RESET */
+* { box-sizing: border-box; }
+html,body { height:100%; margin:0; padding:0; overflow-x: hidden; font-family: "Helvetica Neue", Arial, sans-serif; }
+
+/* ZINE CONTAINER */
+.zine-container {
+  position: relative;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden; /* chặn horizontal scroll */
+  background: #F6F6F6;
+}
+
+/* Vertical divider (giữa hai cột) */
+.zine-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: rgba(0,0,0,0.06);
+  transform: translateX(-0.5px);
+  pointer-events: none;
+}
+
+/* CÁC CỘT: KHÓA CHÍNH XÁC 50% */
+.zine-col {
+  flex: 0 0 50vw;      /* CHÌA KHÓA: cố định bằng viewport width */
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding: 40px;
+}
+
+
+/* background riêng cho từng cột nếu cần */
+.zine-col.left { padding: 6px; background: #ffffff; color: #111; }
+.zine-col.right { background: #ffffff; color: #111; }
+
+
+/* INNER content để giới hạn width thực tế của text và media */
+.left-inner {
+  max-width: calc(50vw - 80px); /* đảm bảo không vượt ngoài cột */
+  margin: 0; /* nếu muốn căn trái, để margin 0; dùng auto để căn giữa */
+}
+
+/* Ảnh / video fit cột */
+.zine-col img,
+.zine-col video {
+  display: block;
+  height: auto;
+  margin-bottom: 14px;
+  max-width: 100%;
+}
+
+/* caption nhỏ cho ảnh */
+.caption { font-size: 14px; font-family: "Cormorant Garamond", serif; color: #5f5f5f; margin-bottom: 100px; }
+
+/* CỘT PHẢI — inner để giới hạn text width và padding cho lề */
+.zine-col.right .inner {
+  max-width: 640px;
+  margin: 0 auto;           /* căn giữa trong cột */
+  padding-left: 8px;
+  padding-right: 80px;      /* khoảng an toàn bên phải */
+  line-height: 1.9;
+  font-size: 20px;
+  font-family: "Cormorant Garamond", serif;
+}
+
+/* Các đoạn (seg) */
+.poem-text .seg { margin-bottom: 36px; }
+
+/* stanza / lines */
+.poem-text .stanza .line { margin: 0 0 8px 0; }
+
+/* pullquote */
+.poem-text .pullquote {
+  font-size: 28px;
+  line-height: 2;
+  font-weight: 600;
+  padding-left: 18px;
+  border-left: 3px solid rgba(0,0,0,0.06);
+}
+
+/* text align right */
+.poem-text .righttext { text-align: right; }
+
+/* small meta */
+.poem-text .meta { font-size: 13px; color:#666; margin-top: 10px; }
+
+/* HIDE horizontal overflow for inner content */
+.zine-col > * { max-width: 100%; }
+
+/* RESPONSIVE: chuyển stack trên mobile */
+@media (max-width: 900px) {
+  .zine-container { flex-direction: column; height: auto; }
+  .zine-container::after { display: none; }
+  .zine-col { flex-basis: auto; width: 100%; height: auto; padding: 24px; }
+  .left-inner { max-width: 100%; }
+  .zine-col.right .inner { max-width: 100%; margin: 0; padding-right: 0; padding-left: 0; font-size: 18px; line-height: 1.6; }
+}
+.poem-seg1 {
+  font-size: 16px;
+  color: rgba(113, 7, 120, 0.85);
+  line-height: 3;
+}
+.poem-seg2 {
+  font-size: 16px;
+  color: rgba(1, 65, 215, 0.85);
+  line-height: 3;
+}
+.poem-seg3 {
+  font-size: 16px;
+  color: rgba(1, 65, 215, 0.85);
+  line-height: 3;
+  text-align: right;
+  }
+
+  /* Ảnh nhỏ mặc định */
+.zoom-img {
+  width: 80%;
+  cursor: zoom-in;
+  transition: all 0.3s ease;
+  display: block;
+  margin-bottom: 24px;
+}
+/* Khi zoom */
+.zoom-img.expanded {
+  width: 100%;
+  cursor: zoom-out;
+}
+
+.zine-col.left img.media-img.centered {
+  width: 40%;
+  width: auto !important;
+  max-width: 100% !important;
+  display: block;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+
+.caption {
+  margin-top: 8px;
+  margin-bottom: 300px;
+  }
+
+
+.view-link {
+  color: #000;
+  text-decoration: underline;
+}
+
+/* ẢNH cách mép cột 3px mỗi bên */
+/* Mặc định: ảnh/media full-width nhưng CÓ THỂ override */
+.zine-col.left img.media-img,
+.zine-col.left video.media-img {
+  display: block;
+  width: calc(100% - 6px);
+  margin: 0 3px 14px 3px;
+  height: auto;
+}
+.media-block {
+  display: block;
+  margin-bottom: 24px;
+}
+
+.media-block.center-70 {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.media-block.center-50 {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* BLOCK TOOLTIP — bao trọn nhiều dòng, nhiều <br>, nhiều kiểu poem */
+.tooltip-block {
+  position: relative;
+  display: inline-block;    /* để tooltip gắn đúng vào khối text */
+}
+
+/* Phần text được hover */
+.tooltip-trigger {
+  cursor: pointer;
+}
+
+/* BLOCK TOOLTIP */
+.tooltip-block {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-trigger {
+  cursor: pointer;
+}
+
+.tooltip-box {
+  position: fixed;       /* QUAN TRỌNG: để đi theo chuột */
+  pointer-events: none;  /* không bắt hover */
+  padding: 8px 12px;
+  background: #ffffff;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+  font-size: 14px;
+  line-height: 1.5;
+  max-width: 260px;
+  z-index: 9999;
+  display: none;
+}

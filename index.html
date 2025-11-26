@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+  <title>Zine — Two-column</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+  const blocks = document.querySelectorAll(".tooltip-block");
+
+  blocks.forEach(block => {
+    const trigger = block.querySelector(".tooltip-trigger");
+    const box = block.querySelector(".tooltip-box");
+
+    trigger.addEventListener("mousemove", (e)=>{
+      box.style.display = "block";
+      box.style.top = (e.clientY + 8) + "px";   // 8px dưới pointer
+      box.style.left = (e.clientX + 12) + "px"; // 12px phải pointer
+    });
+
+    trigger.addEventListener("mouseleave", ()=>{
+      box.style.display = "none";
+    });
+  });
+});
+  document.addEventListener("DOMContentLoaded", () => {
+    const imgs = document.querySelectorAll(".zoom-img");
+  
+    imgs.forEach(img => {
+      img.addEventListener("click", () => {
+        // nếu có data-full thì thay src khi mở lớn
+        if (!img.classList.contains("expanded") && img.dataset.full) {
+          img.dataset.thumb = img.src;    // lưu ảnh nhỏ
+          img.src = img.dataset.full;     // đổi sang ảnh lớn
+        } else if (img.classList.contains("expanded") && img.dataset.thumb) {
+          img.src = img.dataset.thumb;    // đổi lại ảnh nhỏ
+        }
+  
+        img.classList.toggle("expanded");
+      });
+    });
+  });
+  </script>
+  
+<body>
+
+<div class="zine-container">
+
+  <!-- LEFT COLUMN (media) -->
+  <aside class="zine-col left">
+    <div class="left-inner">
+      <!-- Thay các <img> sau bằng URL ảnh thật của bạn -->
+      <img class="media-img" src="data/DSC05083.jpg" alt="image 1">
+      <p class="caption">Trên thuyền đi đến Cồn Phụng</p>
+     
+      <div class="media-block center-70">
+        <img class="media-img" src="data/IMG_9171.jpg" alt="image 2" >
+        <p class="caption">dbsjjbed Curabitur congue accumsan ante, consectetur eleifend purus laoreet in.</p>
+      </div>
+      <img src="data/IMG_3989.jpg" alt="image 3">
+      <img src="data/IMG_3983.jpg" alt="image 4">
+      <p class="caption">Sân Chim Vàm Hồ - mùa đó vào rừng chúng tôi đi một đoạn ngắn, nghe câu chuyện của rừng</p>
+
+      <img src="data/IMG_8558.jpg" alt="image 5">
+      <p class="caption">Sed a suscipit tortor. Pellentesque...</p>
+
+      <img src="data/IMG_9167.jpg" alt="image 6">
+      <p class="caption">Sed a suscipit tortor. Pellentesque...</p>
+
+      <!-- Video (đã là mp4 link trực tiếp) -->
+      <video playsinline controls>
+        <source src="https://github.com/chaudienoi/bentre/raw/main/IMG_8569.mp4" type="video/mp4">
+        Trình duyệt không hỗ trợ video.
+      </video>
+      <p class="caption">Sed a suscipit tortor. Pellentesque...</p>
+
+      <img src="data/IMG_8511.jpg" alt="image 7">
+      <p class="caption">Sed a suscipit tortor. Pellentesque...</p>
+
+      <div class="media-block center-50">
+        <img class="media-img" src="data/03.jpg" alt="image 8" >
+        <p class="caption">Sed a suscipit tortor. Pellentesque...</p>
+      </div>
+      
+      <video playsinline controls>
+        <source src="https://github.com/chaudienoi/bentre/raw/main/7d9aa15e-fc91-4cf5-a7a7-1c37a8e00bc0.mp4" type="video/mp4">
+      </video>
+      <p class="caption">Sed a suscipit tortor. Pellentesque...</p>
+
+      <img src="data/02.jpg" alt="image 4">
+      <p class="caption">Sed a suscipit tortor. Pellentesque...</p>
+    </div>
+  </aside>
+
+
+  <!-- RIGHT COLUMN (prose poem) -->
+  <main class="zine-col right">
+    <div class="inner poem-text">
+      <div class="tooltip-block">
+        <div class="tooltip-trigger poem-seg1">
+          Chúng tôi đến vào mùa nắng,
+      <br>ánh sáng hắt dài trên dòng sông lập loè trong không khí oi bức.
+      <br>
+      <br>Ánh sáng chiều di chuyển theo chuyển động của con nước —
+      <br>không biết ánh sáng sẽ bò lên bờ hay lùi lại theo dòng.
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      Ánh sáng trong rừng mùa khô, 
+      <br><i>không thấy bóng dáng của một con chim nào cả.</i>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+        Trong miếu,<br>ánh sáng tạt dài vào không gian lặng lẽ,<br>chiếu qua các song cửa kéo và trải lên mái ngói.<br>
+      <br>Hướng nhìn của Bà chúa Xứ ra mặt sông,<br>những lấp lánh hắt lên từ dòng kênh do những con sóng lăn tăn tạo nên.<br>
+      <br>Nước mấp mé cầu phao, có khi lên cao tới gối<br>và che luôn con đường xuống phà.
+      <br>
+      <br>
+      ///
+      <br>
+      <br>
+      Nhà nghỉ ở Giồng Trôm, ngang qua một con lạch nhỏ.
+      <br>ánh sáng nghiêng chiếu vào vách nhà và lá dừa nước, cây bần,
+      <br>đổ lên tường những khoảng bóng tròn mờ.
+      <br>
+      <br>
+      Có vài lần lên trời ngắm sao về đêm,
+      <br>nhưng trời vẫn không đủ tối để thấy được sao.
+      <br>
+      <br>
+      ...<br>
+      <br>
+      <br>
+        </div>
+        <div class="tooltip-box">Lưu An</div>
+      </div>
+      <div class="tooltip-block">
+        <div class="tooltip-trigger poem-seg2">
+          Ban đêm, trước mắt tôi
+        <br>là một màu đen và tấm lưng vuông.
+        <br>
+        <br>Cây chèo thuyền liên tục biến đổi
+        <br>nhờ ánh sáng lốm đốm trên hàng dừa non
+        <br>và một ít ánh đèn mờ nhạt.
+        </div>
+        <div class="tooltip-box">
+          Châu Nhi
+        </div>
+        <br>
+        <br>
+        <br>
+      </div>
+      <div class="tooltip-block">
+        <div class="tooltip-trigger poem-seg3">
+          Các đốm sáng đom đóm thoắt ẩn thoắt hiện.
+          <br>Hầu như buổi đêm tôi không cảm nhận được thực tại.
+          <br>
+          <br>Có nhiều hơn một sự vật ở trên xuồng,
+          <br>có thể chứa thêm được chi nữa?
+          <br>
+          <br>
+          <img src="data/mat062025.jpg" alt="image 1">
+          <br>Cảm giác thiêng liêng
+          <br>và khơi dậy mắt và cơ thể tôi ngày càng rõ hơn.
+        </div>
+        <div class="tooltip-box">
+          Châu Nhi
+        </div>
+      </div>
+      <br>
+      <br>
+      <br>
+      <div class="tooltip-block">
+        <div class="tooltip-trigger poem-seg2">
+          Một căn nhà văn hóa nằm giữa các xưởng vỏ dừa khô.
+         <br>Không có ai bên trong,
+         <br>nhưng tôi cảm nhận đã có người vừa rời đi vào lúc sáng.
+        </div>
+        <div class="tooltip-box">
+          Châu Nhi
+        </div>        
+      </div>
+      <div class="tooltip-block">
+        <div class="tooltip-trigger poem-seg1">
+          Ánh nắng buổi sáng tạt xéo vào sào đồ
+        <br>làm cho đồ có cảm giác sạch và sáng hơn.
+        <br>Những món đồ lâu ngày không được chọn
+        <br>gom lại mang đi đốt bỏ —
+        <br>mùi vải cháy nồng lên một góc trời.
+        </div>
+        <div class="tooltip-box">
+          Lưu An
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+</body>
+</html>
